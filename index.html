@@ -48,7 +48,16 @@
 <link href="./index/css" rel="stylesheet">
 
 
-<script src="./index/banner.js.下載" type="text/javascript" id="cookieBanner-247407485" data-cookieconsent="ignore" data-hs-ignore="true" data-loader="hs-scriptloader" data-hsjs-portal="247407485" data-hsjs-env="prod" data-hsjs-hublet="na2"></script><script src="./index/247407485.js.下載" type="text/javascript" id="hs-analytics"></script><script src="./index/conversations-embed.js.下載" type="text/javascript" id="hubspot-messages-loader" data-loader="hs-scriptloader" data-hsjs-portal="247407485" data-hsjs-env="prod" data-hsjs-hublet="na2"></script><script src="./index/collectedforms.js.下載" type="text/javascript" id="CollectedForms-247407485" crossorigin="anonymous" data-leadin-portal-id="247407485" data-leadin-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="247407485" data-hsjs-env="prod" data-hsjs-hublet="na2"></script><script src="./index/397675978868057" async=""></script><script async="" src="./index/fbevents.js.下載"></script><script type="text/javascript" async="" charset="utf-8" src="./index/recaptcha__zh_tw.js.下載" crossorigin="anonymous" integrity="sha384-iA2Cfae7S5I/+XLIyIclM2+j2nT2BlAn66uddDElQ/wmApPKNRs5gaACWxzRfNbX"></script><script src="./index/jquery.min.js.下載"></script><!--jquery ui 1.8.3-->
+<script src="./index/conversations-embed.js.下載" type="text/javascript" id="hubspot-messages-loader" data-loader="hs-scriptloader" data-hsjs-portal="247407485" data-hsjs-env="prod" data-hsjs-hublet="na2"></script><script src="./index/banner.js.下載" type="text/javascript" id="cookieBanner-247407485" data-cookieconsent="ignore" data-hs-ignore="true" data-loader="hs-scriptloader" data-hsjs-portal="247407485" data-hsjs-env="prod" data-hsjs-hublet="na2"></script><script src="./index/collectedforms.js.下載" type="text/javascript" id="CollectedForms-247407485" crossorigin="anonymous" data-leadin-portal-id="247407485" data-leadin-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="247407485" data-hsjs-env="prod" data-hsjs-hublet="na2"></script><script src="./index/247407485.js.下載" type="text/javascript" id="hs-analytics"></script><script src="./index/397675978868057" async=""></script><script async="" src="./index/fbevents.js.下載"></script><script type="text/javascript" async="" charset="utf-8" src="./index/recaptcha__zh_tw.js.下載" crossorigin="anonymous" integrity="sha384-iA2Cfae7S5I/+XLIyIclM2+j2nT2BlAn66uddDElQ/wmApPKNRs5gaACWxzRfNbX"></script><script src="./index/jquery.min.js.下載"></script><style id="kortex-button-styles">
+    @keyframes kortex-spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes kortex-shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+      20%, 40%, 60%, 80% { transform: translateX(4px); }
+    }
+  </style><!--jquery ui 1.8.3-->
 <script src="./index/jquery-ui.min.js.下載"></script><!--jquery 1.9.0-->
 <script src="./index/bootstrap.js.下載"></script><!--bootsrap3-->
 <script src="./index/dashed.js.下載"></script><!--消除連結虛線.js-->
@@ -362,17 +371,168 @@ src="https://www.facebook.com/tr?id=397675978868057&ev=PageView&noscript=1"
             .sc-story-row{ grid-template-columns:90px 1fr; }
             .sc-video-wrap .video_swiper .sc-video-thumb{ aspect-ratio:16/9; }
         }
+
+        /* 手機版（≤640px）：影音專區／活動新聞放棄橫向滑動輪播，
+           改成單純由上往下的直式排列，不再需要靠 Swiper 計算寬度，
+           徹底避開「有時候一張、有時候擠成三張」那個不穩定的問題。
+           用 !important 蓋過 Swiper 自己加的 flex 版面與位移設定。 */
+        @media(max-width:640px){
+            .sc-video-wrap .video_swiper.swiper-container,
+            .sc-news-wrap .news_swiper.swiper-container{
+                overflow:visible !important;
+            }
+            .sc-video-wrap .video_swiper .swiper-wrapper,
+            .sc-news-wrap .news_swiper .swiper-wrapper{
+                display:block !important;
+                transform:none !important;
+            }
+            .sc-video-wrap .video_swiper .swiper-slide,
+            .sc-news-wrap .news_swiper .swiper-slide{
+                width:100% !important;
+                margin:0 0 20px 0 !important;
+            }
+            .sc-video-wrap .video_swiper .swiper-slide:last-child,
+            .sc-news-wrap .news_swiper .swiper-slide:last-child{
+                margin-bottom:0 !important;
+            }
+        }
     </style>
-<style id="kortex-button-styles">
-    @keyframes kortex-spin {
-      to { transform: rotate(360deg); }
+    <!-- ============================================================
+         結構化資料（JSON-LD）：幫助 Google 摘要卡片、語音助理、
+         AI 摘要工具（ChatGPT／Perplexity／Google AI Overview 等）
+         更準確理解這個頁面的內容。
+         這些內容都是「已經顯示在頁面上的真實內容」的結構化版本，
+         不是額外新增的宣稱——這點很重要：Google 的規範要求結構化
+         資料必須跟頁面上實際看得到的內容一致，不能加頁面沒有的話術。
+    ============================================================ -->
+
+    <!-- 公司基本資料：讓「台灣永生」在 Google 知識面板、語音搜尋更容易被正確識別 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MedicalOrganization",
+        "name": "台灣永生細胞股份有限公司",
+        "alternateName": "StemCyte Taiwan",
+        "url": "https://www.stemcyte.com.tw/",
+        "logo": "https://www.stemcyte.com.tw/assets/front/images/logo.png",
+        "sameAs": [
+            "https://www.facebook.com/StemCyteInc",
+            "https://stemcytebio.com/",
+            "http://www.stemcyte.com/"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+886-800-808-080",
+            "contactType": "customer service",
+            "areaServed": "TW",
+            "availableLanguage": "zh-TW"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "工四路15號",
+            "addressLocality": "林口區",
+            "addressRegion": "新北市",
+            "postalCode": "244",
+            "addressCountry": "TW"
+        }
     }
-    @keyframes kortex-shake {
-      0%, 100% { transform: translateX(0); }
-      10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
-      20%, 40%, 60%, 80% { transform: translateX(4px); }
+    </script>
+
+    <!-- 網站搜尋：讓 Google 有機會在搜尋結果直接顯示「站內搜尋框」（是否顯示由 Google 決定） -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "\u53f0\u7063\u6c38\u751fStemCyte",
+        "url": "https://www.stemcyte.com.tw/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.stemcyte.com.tw/searchresult?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
     }
-  </style><script type="text/javascript" async="" src="./index/f.txt"></script><style type="text/css">html.hs-messages-widget-open.hs-messages-mobile,html.hs-messages-widget-open.hs-messages-mobile body{overflow:hidden!important;position:relative!important}html.hs-messages-widget-open.hs-messages-mobile body{height:100%!important;margin:0!important}#hubspot-messages-iframe-container{display:initial!important;z-index:2147483647;position:fixed!important;bottom:0!important}#hubspot-messages-iframe-container:hover .hs-drag-handle--v2--widget-open--left,#hubspot-messages-iframe-container:hover .hs-drag-handle--v2--widget-open--right{display:flex!important}#hubspot-messages-iframe-container.widget-align-left{left:0!important}#hubspot-messages-iframe-container.widget-align-right{right:0!important}#hubspot-messages-iframe-container.widget-align-center{left:50%!important;transform:translateX(-50%)!important;bottom:32px!important}#hubspot-messages-iframe-container.hs-messages-lightbox-expanded{top:0!important;right:0!important;bottom:0!important;left:0!important;width:100%!important;height:100%!important;z-index:2147483647!important;transform:none!important}#hubspot-messages-iframe-container.hs-messages-lightbox-expanded iframe{position:fixed!important;top:0!important;right:0!important;bottom:0!important;left:0!important;width:100%!important;height:100%!important}#hubspot-messages-iframe-container.internal{z-index:1111}#hubspot-messages-iframe-container.internal iframe{min-width:108px}#hubspot-messages-iframe-container .hs-shadow-container{display:initial!important;z-index:-1;position:absolute;width:0;height:0;bottom:0;content:""}#hubspot-messages-iframe-container .hs-shadow-container.internal{display:none!important}#hubspot-messages-iframe-container .hs-shadow-container.active{width:400px;height:400px}#hubspot-messages-iframe-container iframe{display:initial!important;width:100%!important;height:100%!important;border:none!important;position:absolute!important;bottom:0!important;right:0!important;background:transparent!important}#hubspot-messages-iframe-container .hs-drag-handle--v2--widget-open--right{bottom:20px;left:-5px;display:none!important}#hubspot-messages-iframe-container .hs-drag-handle--v2--widget-open--left{bottom:20px;right:-5px;display:none!important}.hs-drag-handle{position:absolute;cursor:grab;height:60px;display:none;align-items:center;transition:opacity .5s ease;transition-delay:.5s;opacity:1}.hs-drag-handle--v1--right{right:82px;bottom:12px}.hs-drag-handle--v1--left{left:82px;bottom:12px}.hs-drag-handle--v2--pill-launcher--right{bottom:20px;left:10px}.hs-drag-handle--v2--pill-launcher--left{bottom:20px;right:10px}.hs-drag-handle--v2--hidden--left,.hs-drag-handle--v2--hidden--right{opacity:0!important;pointer-events:none!important;transition:none!important}.hs-drag-overlay{position:absolute;top:0;left:0;right:0;bottom:0;user-select:none;z-index:999;display:none}@media print{#hubspot-messages-iframe-container.hs-widget-hide-on-print{display:none!important}}</style></head>
+    </script>
+
+    <!-- FAQ：對應頁面上「常見問題」區塊的四題，內容完全一致 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "存捐互利庫與公捐臍帶血庫的差別是甚麼？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "存捐互利庫的臍帶血所有權仍屬於存戶，未來若配對合適，需經存戶同意才能提供使用；公捐臍帶血庫則是產婦生產時簽署捐贈同意書，由血庫直接保管，未來配對合適即可直接提供治療使用。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "紅血球不分離處理法相較於其它處理方法有何優點？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "這是永笙生技的專利處理技術，僅移除血漿，完整保留有核細胞與紅血球層，最大程度留住臍帶血中珍貴的幹細胞資源，有助提升移植成功率與復原效率。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "臍帶血中的幹細胞數目，對於未來移植手術很重要？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "移植時除了考慮 HLA 配對，幹細胞的活性與數量也是關鍵，需依病患體重換算足量的有核細胞，才能達到理想的移植與復原效果。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何選擇一家好的臍帶血幹細胞銀行？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "建議從六個面向評估：協助完成的移植案例數、合作醫學中心數量、自有公捐血庫規模、合約保障是否完整、臍帶血處理保存方式，以及是否參與政府專案。"
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- 影音專區：跟著 $video 陣列動態產生，後台改影片、這裡自動同步，不用手動維護 -->
+        <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+                        {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                    "@type": "VideoObject",
+                    "name": "\u6210\u529f\u6cbb\u7652\u99ac\u4f86\u897f\u4e9e\u9f94\u5c0f\u5f1f \u91cd\u578b\u5730\u4e2d\u6d77\u578b\u8ca7\u8840 \u2014\u79fb\u690d\u611f\u4eba\u6545\u4e8b \u9060\u898b \u00d7 \u6c38\u751f",
+                    "description": "\u6210\u529f\u6cbb\u7652\u99ac\u4f86\u897f\u4e9e\u9f94\u5c0f\u5f1f \u91cd\u578b\u5730\u4e2d\u6d77\u578b\u8ca7\u8840 \u2014\u79fb\u690d\u611f\u4eba\u6545\u4e8b \u9060\u898b \u00d7 \u6c38\u751f",
+                    "thumbnailUrl": "https:\/\/www.stemcyte.com.tw\/datas\/upload\/site\/1759474227-41.jpeg",
+                    "embedUrl": "https:\/\/www.youtube.com\/watch?v=xhuLUZX49_A"                }
+            },                        {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                    "@type": "VideoObject",
+                    "name": "Darren\u90b1\u51f1\u5049\u592b\u59bb\u56b4\u9078\u81cd\u5e36\u8840\u9280\u884c \u9001\u7d66\u5bf6\u5bf6\u7b2c\u4e00\u4efd\u79ae\u7269",
+                    "description": "Darren\u90b1\u51f1\u5049\u592b\u59bb\u56b4\u9078\u81cd\u5e36\u8840\u9280\u884c \u9001\u7d66\u5bf6\u5bf6\u7b2c\u4e00\u4efd\u79ae\u7269",
+                    "thumbnailUrl": "https:\/\/www.stemcyte.com.tw\/datas\/upload\/site\/1759474170-46.jpeg",
+                    "embedUrl": "https:\/\/www.youtube.com\/watch?v=dn3FEco-30U"                }
+            },                        {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                    "@type": "VideoObject",
+                    "name": "\u4ec0\u9ebc\u662f\u842c\u80fd\u7d30\u80de?",
+                    "description": "\u4ec0\u9ebc\u662f\u842c\u80fd\u7d30\u80de?",
+                    "thumbnailUrl": "https:\/\/www.stemcyte.com.tw\/datas\/upload\/site\/1770354845-17.jpeg",
+                    "embedUrl": "https:\/\/youtu.be\/VAm_-8fhD2c"                }
+            }                    ]
+    }
+    </script>
+    
+<script type="text/javascript" async="" src="./index/f.txt"></script><style type="text/css">html.hs-messages-widget-open.hs-messages-mobile,html.hs-messages-widget-open.hs-messages-mobile body{overflow:hidden!important;position:relative!important}html.hs-messages-widget-open.hs-messages-mobile body{height:100%!important;margin:0!important}#hubspot-messages-iframe-container{display:initial!important;z-index:2147483647;position:fixed!important;bottom:0!important}#hubspot-messages-iframe-container:hover .hs-drag-handle--v2--widget-open--left,#hubspot-messages-iframe-container:hover .hs-drag-handle--v2--widget-open--right{display:flex!important}#hubspot-messages-iframe-container.widget-align-left{left:0!important}#hubspot-messages-iframe-container.widget-align-right{right:0!important}#hubspot-messages-iframe-container.widget-align-center{left:50%!important;transform:translateX(-50%)!important;bottom:32px!important}#hubspot-messages-iframe-container.hs-messages-lightbox-expanded{top:0!important;right:0!important;bottom:0!important;left:0!important;width:100%!important;height:100%!important;z-index:2147483647!important;transform:none!important}#hubspot-messages-iframe-container.hs-messages-lightbox-expanded iframe{position:fixed!important;top:0!important;right:0!important;bottom:0!important;left:0!important;width:100%!important;height:100%!important}#hubspot-messages-iframe-container.internal{z-index:1111}#hubspot-messages-iframe-container.internal iframe{min-width:108px}#hubspot-messages-iframe-container .hs-shadow-container{display:initial!important;z-index:-1;position:absolute;width:0;height:0;bottom:0;content:""}#hubspot-messages-iframe-container .hs-shadow-container.internal{display:none!important}#hubspot-messages-iframe-container .hs-shadow-container.active{width:400px;height:400px}#hubspot-messages-iframe-container iframe{display:initial!important;width:100%!important;height:100%!important;border:none!important;position:absolute!important;bottom:0!important;right:0!important;background:transparent!important}#hubspot-messages-iframe-container .hs-drag-handle--v2--widget-open--right{bottom:20px;left:-5px;display:none!important}#hubspot-messages-iframe-container .hs-drag-handle--v2--widget-open--left{bottom:20px;right:-5px;display:none!important}.hs-drag-handle{position:absolute;cursor:grab;height:60px;display:none;align-items:center;transition:opacity .5s ease;transition-delay:.5s;opacity:1}.hs-drag-handle--v1--right{right:82px;bottom:12px}.hs-drag-handle--v1--left{left:82px;bottom:12px}.hs-drag-handle--v2--pill-launcher--right{bottom:20px;left:10px}.hs-drag-handle--v2--pill-launcher--left{bottom:20px;right:10px}.hs-drag-handle--v2--hidden--left,.hs-drag-handle--v2--hidden--right{opacity:0!important;pointer-events:none!important;transition:none!important}.hs-drag-overlay{position:absolute;top:0;left:0;right:0;bottom:0;user-select:none;z-index:999;display:none}@media print{#hubspot-messages-iframe-container.hs-widget-hide-on-print{display:none!important}}</style></head>
 <body data-page="index" style="">
 
 <!-- Google Tag Manager (noscript) -->
@@ -656,7 +816,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 	<!-- ① SWIPER：完全沿用原本 $advertisements 輪播（不修改資料來源與 JS） -->
 	<div class="swiper-container index_top swiper-container-horizontal">
-	    <div class="swiper-wrapper" style="transform: translate3d(-3810px, 0px, 0px); transition-duration: 300ms;"><div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="5" style="width: 1905px;">
+	    <div class="swiper-wrapper" style="transform: translate3d(-5715px, 0px, 0px); transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="5" style="width: 1905px;">
 	                <div class="swiper_imgbox">
 
 	                    	                    	<!--電腦版的圖-->
@@ -674,7 +834,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	            </div>
 
             <!--新的輪播開始-->
-                        		            <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="0" style="width: 1905px;">
+                        		            <div class="swiper-slide" data-swiper-slide-index="0" style="width: 1905px;">
 	                <div class="swiper_imgbox">
 
 	                    	                    	<!--電腦版的圖-->
@@ -690,7 +850,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	                    
 	                </div>
 	            </div>
-	         		            <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="1" style="width: 1905px;">
+	         		            <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="1" style="width: 1905px;">
 	                <div class="swiper_imgbox">
 
 	                    	                    	<!--電腦版的圖-->
@@ -706,7 +866,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	                    
 	                </div>
 	            </div>
-	         		            <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="2" style="width: 1905px;">
+	         		            <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="2" style="width: 1905px;">
 	                <div class="swiper_imgbox">
 
 	                    	                    	<!--電腦版的圖-->
@@ -722,7 +882,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	                    
 	                </div>
 	            </div>
-	         		            <div class="swiper-slide" data-swiper-slide-index="3" style="width: 1905px;">
+	         		            <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="3" style="width: 1905px;">
 	                <div class="swiper_imgbox">
 
 	                    	                    	<!--電腦版的圖-->
@@ -772,7 +932,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	            </div>
 	         			                <!--新的輪播結束-->
 
-	    <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev" data-swiper-slide-index="0" style="width: 1905px;">
+	    <div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0" style="width: 1905px;">
 	                <div class="swiper_imgbox">
 
 	                    	                    	<!--電腦版的圖-->
@@ -789,7 +949,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	                </div>
 	            </div></div>
 
-	    <div class="swiper-pagination index_top_pag swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+	    <div class="swiper-pagination index_top_pag swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
 	    <div class="swiper-button-next index_top_pag-next"></div>
 	    <div class="swiper-button-prev index_top_pag-prev"></div>
 
@@ -842,7 +1002,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<a class="sc-more" href="https://www.youtube.com/channel/UCYA_PeXx0R-MYJTXJokmK0w?view_as=subscriber" target="_blank">看更多影片</a>
 			</div>
 			<div class="swiper-container video_swiper swiper-container-horizontal">
-		        <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+		        <div class="swiper-wrapper">
 												                    <div class="swiper-slide swiper-slide-active" style="width: 344px; margin-right: 20px;">
         	            	<a href="https://www.youtube.com/watch?v=xhuLUZX49_A" data-rel="lightcase" target="_blank">
         	            		<div class="sc-video-thumb" style="background-image: url(https://www.stemcyte.com.tw/datas/upload/site/1759474227-41.jpeg )"></div>
@@ -888,7 +1048,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		        breakpoints: {
 		            992: { simulateTouch: true, slidesPerView: 2, spaceBetween: 16 },
 		            768: { simulateTouch: true, slidesPerView: 2, spaceBetween: 16 },
-		            640: { simulateTouch: true, slidesPerView: 1, spaceBetween: 16 }
+		            640: { simulateTouch: false, slidesPerView: 1, spaceBetween: 16, autoplay: false }
 		        }
 		    });
 		    });
@@ -904,7 +1064,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<a class="sc-more" href="https://www.stemcyte.com.tw/eventnews">MORE</a>
 			</div>
 			<div class="swiper-container news_swiper swiper-container-horizontal">
-		        <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+		        <div class="swiper-wrapper">
 										    			            <div class="swiper-slide swiper-slide-active" style="width: 350.667px; margin-right: 10px;">
 			            	<a href="https://www.stemcyte.com.tw/content?id=382">
 				            	<img src="./index/300x270-1785836102-53.png" class="img-responsive">
@@ -1327,7 +1487,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		        breakpoints: {
 		            992: { simulateTouch: true, slidesPerView: 2, spaceBetween: 10 },
 		            768: { simulateTouch: true, slidesPerView: 2, spaceBetween: 10 },
-		            640: { simulateTouch: true, slidesPerView: 1, spaceBetween: 10 }
+		            640: { simulateTouch: false, slidesPerView: 1, spaceBetween: 10, autoplay: false }
 		        }
 		    });
 		    });
@@ -1438,7 +1598,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<div class="img_center footer_logo">
 				<a href="https://www.stemcyte.com.tw/index.php"><img src="./index/logo.png" class="img-responsive" style="max-width: 223px;"></a>
 				<div class="company_link">
-                    <a target="_blank" href="https://stemcytebio.com/?__hstc=21747812.65220b319095dc44982afc2dc1ca9979.1789089709641.1789694493747.1789701926022.22&amp;__hssc=21747812.1.1789701926022&amp;__hsfp=4f9ae0c35118c56f59e711c0cab95cc0">永笙生技</a>
+                    <a target="_blank" href="https://stemcytebio.com/?__hstc=21747812.65220b319095dc44982afc2dc1ca9979.1789089709641.1789950830215.1789952886536.27&amp;__hssc=21747812.6.1789952886536&amp;__hsfp=4f9ae0c35118c56f59e711c0cab95cc0">永笙生技</a>
                     <div class="foot_line"></div>
 					<a target="_blank" href="http://www.stemcyte.com/">美國永生</a>
 					<!-- <div class="foot_line"></div> -->
@@ -1513,7 +1673,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </a> -->
 
 
-<a class="gototop" href="https://www.stemcyte.com.tw/#" id="back-to-top" title="Back to top"><img src="./index/gototop.png"></a>
+<a class="gototop show" href="https://www.stemcyte.com.tw/#" id="back-to-top" title="Back to top"><img src="./index/gototop.png"></a>
 
 
 <script type="text/javascript">
@@ -1579,4 +1739,4 @@ $(document).ready(function ($) {
 
 
 
-<iframe owner="archetype" title="archetype" style="display: none; visibility: hidden;" src="./index/saved_resource.html"></iframe><div role="region" aria-label="聊天小工具" id="hubspot-messages-iframe-container" class="widget-align-right" style="color-scheme: light; min-height: 96px; min-width: 100px; width: 92px; height: 92px;"><div class="hs-shadow-container"></div><iframe src="./index/794d9c0a64554e08aa54bf44f82d1a3f.html" id="hubspot-conversations-iframe" title="聊天小工具" allowfullscreen="" data-test-id="chat-widget-iframe"></iframe></div><a id="bottomBar" style="position: fixed; bottom: -40px; left: 0px; z-index: 9999; transform: translateX(-50%); background-color: transparent; border-radius: 5px 5px 0px 0px; opacity: 0.3; padding: 5px; transition: 0.3s; cursor: pointer; max-height: 100px; max-width: 45px;"><img src="chrome-extension://kobncfkmjelbefaoohoblamnbackjggk/icon/icon_32.png" style="width: 32px; height: 32px;"></a></body><style id="igor_ext_nofollow">a[rel~='nofollow'],a[rel~='sponsored'],a[rel~='ugc']{outline:.14em dotted red !important;outline-offset:.2em;}a[rel~='nofollow'] img,a[rel~='sponsored'] img,a[rel~='ugc'] img{outline:2px dotted red !important;outline-offset:.2em;}</style></html>
+<iframe owner="archetype" title="archetype" style="display: none; visibility: hidden;" src="./index/saved_resource.html"></iframe><a id="bottomBar" style="position: fixed; bottom: -40px; left: 0px; z-index: 9999; transform: translateX(-50%); background-color: transparent; border-radius: 5px 5px 0px 0px; opacity: 0.3; padding: 5px; transition: 0.3s; cursor: pointer; max-height: 100px; max-width: 45px;"><img src="chrome-extension://kobncfkmjelbefaoohoblamnbackjggk/icon/icon_32.png" style="width: 32px; height: 32px;"></a><div role="region" aria-label="聊天小工具" id="hubspot-messages-iframe-container" class="widget-align-right" style="color-scheme: light; min-height: 96px; min-width: 100px; width: 282px; height: 253px;"><div class="hs-shadow-container"></div><iframe src="./index/794d9c0a64554e08aa54bf44f82d1a3f.html" id="hubspot-conversations-iframe" title="聊天小工具" allowfullscreen="" data-test-id="chat-widget-iframe"></iframe></div></body><style id="igor_ext_nofollow">a[rel~='nofollow'],a[rel~='sponsored'],a[rel~='ugc']{outline:.14em dotted red !important;outline-offset:.2em;}a[rel~='nofollow'] img,a[rel~='sponsored'] img,a[rel~='ugc'] img{outline:2px dotted red !important;outline-offset:.2em;}</style></html>
